@@ -1,4 +1,4 @@
-export const salesData = {
+export const salesData: Record<number, { month: string; sales: number }[]> = {
   2022: [
     { month: "Jan", sales: 12000 },
     { month: "Feb", sales: 15000 },
