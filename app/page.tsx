@@ -1,5 +1,6 @@
 "use client";
 
+import ChartTabs from "@/components/molecules/ChartTabs";
 import { useState } from "react";
 import SalesChart from "@/components/organisms/SalesChart";
 import { salesData } from "@/data/salesData";
@@ -37,35 +38,10 @@ export default function Home() {
         />
       </div>
 
-      {/* Chart Type Buttons */}
-      <div className="flex gap-3 mb-6">
-        <button
-          className={`px-4 py-2 border ${
-            chartType === "bar" ? "bg-black text-white" : ""
-          }`}
-          onClick={() => setChartType("bar")}
-        >
-          Bar
-        </button>
-
-        <button
-          className={`px-4 py-2 border ${
-            chartType === "line" ? "bg-black text-white" : ""
-          }`}
-          onClick={() => setChartType("line")}
-        >
-          Line
-        </button>
-
-        <button
-          className={`px-4 py-2 border ${
-            chartType === "pie" ? "bg-black text-white" : ""
-          }`}
-          onClick={() => setChartType("pie")}
-        >
-          Pie
-        </button>
-      </div>
+      {/* Chart Tabs */}
+      <section className="mb-6 flex gap-6">
+        <ChartTabs value={chartType} onChange={setChartType} />
+      </section>
 
       {/* Chart */}
       <SalesChart data={filteredData} type={chartType} />

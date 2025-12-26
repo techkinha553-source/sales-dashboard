@@ -15,8 +15,13 @@ import {
   Legend,
 } from "recharts";
 
+type SalesData = {
+  month: string;
+  sales: number;
+};
+
 type Props = {
-  data: any[];
+  data: SalesData[];
   type: "bar" | "line" | "pie";
 };
 
