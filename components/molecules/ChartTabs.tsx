@@ -17,11 +17,11 @@ export default function ChartTabs({ value, onChange }: ChartTabsProps) {
           key={tab}
           onClick={() => onChange(tab)}
           className={`px-6 py-3 rounded-full text-base font-semibold transition-all duration-200
-            ${
-              value === tab
-                ? "bg-blue-600 dark:bg-blue-500 text-white shadow-lg"
-                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
-            } hover:scale-105 active:scale-95`}
+  ${
+    value === tab
+      ? "bg-blue-700 dark:bg-blue-600 text-white shadow-lg"
+      : "bg-blue-500 dark:bg-blue-500 text-white hover:bg-blue-600 dark:hover:bg-blue-400"
+  } hover:scale-105 active:scale-95`}
         >
           {tab.toUpperCase()}
         </button>
