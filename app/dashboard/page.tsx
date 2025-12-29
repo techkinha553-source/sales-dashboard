@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ChartTabs from "@/components/molecules/ChartTabs";
 import ThemeToggle from "@/components/atoms/ThemeToggle";
+import KpiCards from "@/components/organisms/KpiCards";
 
 export default function Dashboard() {
   const [chartType, setChartType] = useState<"bar" | "line" | "pie">("bar");
@@ -13,15 +14,17 @@ export default function Dashboard() {
       <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-bold">Sales Dashboard</h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          {/* <p className="text-sm text-gray-600 dark:text-gray-400">
             Visual overview of sales performance
-          </p>
+          </p> */}
         </div>
         <ThemeToggle />
       </header>
 
       {/* KPI Cards */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <KpiCards />
+      {/* KPI Cards */}
+      {/* <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {[
           { label: "Total Sales", value: "₹1.2M", icon: "💰" },
           { label: "Revenue", value: "₹860K", icon: "📈" },
@@ -43,7 +46,7 @@ export default function Dashboard() {
             </div>
           </div>
         ))}
-      </section>
+      </section> */}
 
       {/* Chart Tabs */}
       <section className="mb-6">

@@ -4,6 +4,7 @@ import ChartTabs from "@/components/molecules/ChartTabs";
 import { useState } from "react";
 import SalesChart from "@/components/organisms/SalesChart";
 import { salesData } from "@/data/salesData";
+import KpiCards from "@/components/organisms/KpiCards";
 
 export default function Home() {
   const [year, setYear] = useState(2024);
@@ -15,14 +16,20 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen bg-gray-100 dark:bg-gray-950 p-6 sm:p-10 text-black dark:text-white transition-colors">
+    <main className="min-h-screen bg-gray-100 dark:bg-gray-950 p-8 text-black dark:text-white">
+
+      {/* Header */}
+      <header className="max-w-6xl mx-auto mb-6">
+        <h1 className="text-4xl font-bold tracking-tight">
+          Sales Dashboard
+        </h1>
+      </header>
+
+      {/*  KPI Cards – FULL WIDTH */}
+      <KpiCards />
+
+      {/* Content Wrapper */}
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight">
-            Sales Dashboard
-          </h1>
-        </header>
 
         {/* Filters Card */}
         <section className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-8">
@@ -52,9 +59,10 @@ export default function Home() {
         </section>
 
         {/* Chart Card */}
-        <section className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 transition-all">
+        <section className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
           <SalesChart data={filteredData} type={chartType} />
         </section>
+
       </div>
     </main>
   );
