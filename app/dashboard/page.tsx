@@ -6,7 +6,9 @@ import ThemeToggle from "@/components/atoms/ThemeToggle";
 import KpiCards from "@/components/organisms/KpiCards";
 
 export default function Dashboard() {
-  const [chartType, setChartType] = useState<"bar" | "line" | "pie">("bar");
+  const [chartType, setChartType] = useState<
+  "bar" | "line" | "pie" | "area" | "stacked" | "combo"
+>("bar");
 
   return (
     <main className="min-h-screen bg-gray-100 dark:bg-gray-950 p-8 text-black dark:text-white transition-colors">

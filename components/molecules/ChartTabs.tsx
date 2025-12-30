@@ -1,6 +1,12 @@
 "use client";
 
-type ChartType = "bar" | "line" | "pie";
+type ChartType =
+  | "bar"
+  | "line"
+  | "pie"
+  | "area"
+  | "stacked"
+  | "combo";
 
 type ChartTabsProps = {
   value: ChartType;
@@ -8,15 +14,22 @@ type ChartTabsProps = {
 };
 
 export default function ChartTabs({ value, onChange }: ChartTabsProps) {
-  const tabs: ChartType[] = ["bar", "line", "pie"];
+  const tabs: ChartType[] = [
+    "bar",
+    "line",
+    "pie",
+    "area",
+    "stacked",
+    "combo",
+  ];
 
   return (
-    <div className="flex bg-gray-100 dark:bg-gray-800 p-3 rounded-xl space-x-4">
+    <div className="flex flex-wrap justify-center bg-gray-100 dark:bg-gray-800 p-3 rounded-xl gap-4">
       {tabs.map((tab) => (
         <button
           key={tab}
           onClick={() => onChange(tab)}
-          className={`px-7 py-3 rounded-full text-[15px] font-semibold
+          className={`px-6 py-3 rounded-full text-sm font-semibold
             transition-all duration-200
             ${
               value === tab

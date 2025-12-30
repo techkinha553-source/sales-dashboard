@@ -7,12 +7,16 @@ import {
   Line,
   PieChart,
   Pie,
+  AreaChart,
+  Area,
+  ComposedChart,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
   Cell,
   Legend,
+  CartesianGrid,
 } from "recharts";
 
 type SalesData = {
@@ -22,7 +26,7 @@ type SalesData = {
 
 type Props = {
   data: SalesData[];
-  type: "bar" | "line" | "pie";
+  type: "bar" | "line" | "pie" | "area" | "stacked" | "combo";
 };
 
 const COLORS = [
@@ -43,8 +47,11 @@ const COLORS = [
 export default function SalesChart({ data, type }: Props) {
   return (
     <ResponsiveContainer width="100%" height={400}>
+
+      {/* BAR CHART */}
       {type === "bar" && (
         <BarChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
@@ -52,15 +59,23 @@ export default function SalesChart({ data, type }: Props) {
         </BarChart>
       )}
 
+      {/* LINE CHART */}
       {type === "line" && (
         <LineChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
-          <Line dataKey="sales" stroke="#16a34a" strokeWidth={2} />
+          <Line
+            type="monotone"
+            dataKey="sales"
+            stroke="#16a34a"
+            strokeWidth={2}
+          />
         </LineChart>
       )}
 
+      {/* PIE CHART */}
       {type === "pie" && (
         <PieChart>
           <Tooltip />
@@ -83,6 +98,52 @@ export default function SalesChart({ data, type }: Props) {
           </Pie>
         </PieChart>
       )}
+
+      {/* AREA CHART */}
+      {type === "area" && (
+        <AreaChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Area
+            type="monotone"
+            dataKey="sales"
+            stroke="#2563eb"
+            fill="#93c5fd"
+          />
+        </AreaChart>
+      )}
+
+      {/* STACKED BAR CHART */}
+      {type === "stacked" && (
+        <BarChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Bar dataKey="sales" stackId="a" fill="#2563eb" />
+          <Bar dataKey="sales" stackId="a" fill="#22c55e" />
+        </BarChart>
+      )}
+
+      {/* COMBO CHART (BAR + LINE) */}
+      {type === "combo" && (
+        <ComposedChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Bar dataKey="sales" fill="#6366f1" />
+          <Line
+            type="monotone"
+            dataKey="sales"
+            stroke="#ef4444"
+            strokeWidth={2}
+          />
+        </ComposedChart>
+      )}
+
     </ResponsiveContainer>
   );
 }

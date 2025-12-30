@@ -9,7 +9,8 @@ import KpiCards from "@/components/organisms/KpiCards";
 export default function Home() {
   const [year, setYear] = useState(2024);
   const [threshold, setThreshold] = useState(0);
-  const [chartType, setChartType] = useState<"bar" | "line" | "pie">("bar");
+  const [chartType, setChartType] = useState<
+  "bar" | "line" | "pie" | "area" | "stacked" | "combo">("bar");
 
   const filteredData = salesData[year].filter(
     (item) => item.sales >= threshold
