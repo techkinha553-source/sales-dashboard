@@ -8,6 +8,7 @@ import KpiCards from "@/components/organisms/KpiCards";
 import DashboardControls from "@/components/molecules/DashboardControls";
 // import CategoryPieChart from "@/components/organisms/CategoryPieChart";
 // import { categorySales } from "@/data/categorySales";
+import YearlyComparisonSection from "@/components/organisms/YearlyComparisonSection";
 
 export default function Home() {
   const [year, setYear] = useState(2024);
@@ -79,6 +80,8 @@ export default function Home() {
           <SalesChart data={filteredData} type={chartType} />
         </section>
 
+          {/* NEW SECTION BELOW DASHBOARD */}
+          <YearlyComparisonSection /> 
       </div>
     </main>
   );
