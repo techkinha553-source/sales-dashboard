@@ -1,11 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Base (Light Mode)
+   ========================= */
 html,
 body {
-  background-color: white;
-  color: black;
+  background-color: #ffffff;
+  color: #030712;
 }
 
-.dark html,
-.dark body {
+/* =========================
+   Dark Mode
+   ========================= */
+html.dark,
+html.dark body {
   background-color: #030712;
-  color: white;
+  color: #f9fafb;
+}
+
+/* =========================
+   THEME VARIABLES
+   ========================= */
+:root {
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+  --card-text: #030712;
+  --muted-text: #6b7280;
+  --icon-bg: rgba(59, 130, 246, 0.15);
+}
+
+html.dark {
+  --card-bg: linear-gradient(180deg, #161b22, #0d1117);
+  --card-border: #30363d;
+  --card-text: #f9fafb;
+  --muted-text: #9ca3af;
+  --icon-bg: rgba(59, 130, 246, 0.15);
 }
