@@ -1,0 +1,183 @@
+@media (max-width: 900px) {
+  .controlsRow {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .divider {
+    display: none;
+  }
+}
+/* ROOT */
+/* .dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  max-width: 900px;
+} */
+
+.dashboard {
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--dashboard-bg);
+  border: 1px solid var(--dashboard-border);
+}
+
+/* ROW = SINGLE HORIZONTAL LINE */
+
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+/* LABEL */
+.label {
+  min-width: 80px;
+  font-size: 14px;
+  font-weight: 500;
+  /* color: var(--text-muted); */
+  color: rgb(101, 100, 100);
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+/* YEAR TABS */
+.yearTabs {
+  display: inline-flex;
+  background: var(--muted);
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.yearBtn {
+  position: relative;
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.yearBtn:hover {
+  color: var(--text);
+}
+
+.yearBtn span {
+  position: relative;
+  z-index: 1;
+}
+
+.active {
+  background: var(--primary);
+  color: #fff !important;
+}
+
+/* CHART BUTTONS */
+.chartButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.chartBtn {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: var(--muted);
+  cursor: pointer;
+  color: var(--text);
+}
+
+.chartBtn:hover {
+  background: var(--muted-hover);
+}
+
+.chartBtn.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* INPUT */
+.inputWrapper {
+  position: relative;
+  width: 180px;
+}
+
+.inputWrapper input {
+  width: 100%;
+  padding: 10px 34px;
+  border-radius: 10px;
+  border: 1px solid #2563eb;
+  background: var(--bg);
+  color: rgb(101, 100, 100);
+}
+
+.inputWrapper {
+  position: relative;
+  width: 160px;
+}
+
+.inputIconLeft {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(101, 100, 100);
+}
+
+.inputIconRight {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: rgb(101, 100, 100);
+}
+
+/* 🌗 TOGGLE MODE VARIABLES */
+:root {
+  --bg: #ffffff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --muted: #f3f4f6;
+  --muted-hover: #e5e7eb;
+  --border: #e5e7eb;
+  --primary: #2563eb;
+}
+
+/* [data-theme="dark"] {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+  --text-muted: #94a3b8;
+  --muted: #1e293b;
+  --muted-hover: #334155;
+  --border: #334155;
+  --primary: #3b82f6;
+} */
+
+.dark {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+  --text-muted: #94a3b8;
+  --muted: #1e293b;
+  --muted-hover: #334155;
+  --border: #334155;
+  --primary: #3b82f6;
+}
+/* 
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+} */

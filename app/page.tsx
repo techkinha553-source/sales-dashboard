@@ -1,10 +1,13 @@
 "use client";
 
-import ChartTabs from "@/components/molecules/ChartTabs";
+// import ChartTabs from "@/components/molecules/ChartTabs";
 import { useState } from "react";
 import SalesChart from "@/components/organisms/SalesChart";
 import { salesData } from "@/data/salesData";
 import KpiCards from "@/components/organisms/KpiCards";
+import DashboardControls from "@/components/molecules/DashboardControls";
+// import CategoryPieChart from "@/components/organisms/CategoryPieChart";
+// import { categorySales } from "@/data/categorySales";
 
 export default function Home() {
   const [year, setYear] = useState(2024);
@@ -33,7 +36,7 @@ export default function Home() {
       <div className="max-w-6xl mx-auto">
 
         {/* Filters Card */}
-        <section className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-8">
+        {/* <section className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-8">
           <div className="flex flex-col sm:flex-row gap-4">
             <select
               className="border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -52,11 +55,23 @@ export default function Home() {
               onChange={(e) => setThreshold(Number(e.target.value))}
             />
           </div>
-        </section>
+        </section> */}
 
         {/* Chart Tabs */}
-        <section className="mb-6 flex justify-center">
+        {/* <section className="mb-6 flex justify-center">
           <ChartTabs value={chartType} onChange={setChartType} />
+        </section> */}
+
+        {/* Dashboard Controls */}
+        <section className="mb-8">
+          <DashboardControls
+            year={year}
+            onYearChange={setYear}
+            chartType={chartType}
+            onChartChange={setChartType}
+            threshold={threshold}
+            onThresholdChange={setThreshold}
+          />
         </section>
 
         {/* Chart Card */}
