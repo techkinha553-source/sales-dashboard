@@ -72,6 +72,7 @@
 
 import { useState } from "react";
 import DashboardControls from "@/components/molecules/DashboardControls";
+import ImportCustomData from "@/components/ImportCustomData";
 
 export default function PreviewPage() {
   const [year, setYear] = useState(2024);
@@ -92,6 +93,8 @@ export default function PreviewPage() {
           onThresholdChange={setThreshold}
         />
       </div>
+      <ImportCustomData />
     </main>
+    
   );
 }

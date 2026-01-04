@@ -9,6 +9,7 @@ import DashboardControls from "@/components/molecules/DashboardControls";
 // import CategoryPieChart from "@/components/organisms/CategoryPieChart";
 // import { categorySales } from "@/data/categorySales";
 import YearlyComparisonSection from "@/components/organisms/YearlyComparisonSection";
+// import ImportCustomData from "@/components/ImportCustomData";
 
 export default function Home() {
   const [year, setYear] = useState(2024);
@@ -24,11 +25,20 @@ export default function Home() {
     <main className="min-h-screen bg-gray-100 dark:bg-gray-950 p-8 text-black dark:text-white">
 
       {/* Header */}
-      <header className="max-w-6xl mx-auto mb-6">
+      {/* <header className="max-w-6xl mx-auto mb-6">
         <h1 className="text-4xl font-bold tracking-tight">
           Sales Dashboard
         </h1>
-      </header>
+      </header> */}
+      {/* Header */}
+        <header className="max-w-6xl mx-auto mb-6 space-y-4">
+          <h1 className="text-4xl font-bold tracking-tight">
+            Sales Dashboard
+          </h1>
+
+          {/* Import Custom Data Button */}
+          {/* <ImportCustomData /> */}
+        </header>
 
       {/*  KPI Cards – FULL WIDTH */}
       <KpiCards />
