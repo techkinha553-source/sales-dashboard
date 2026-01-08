@@ -27,6 +27,8 @@ interface Props {
   onChartChange: (type: ChartType) => void;
   threshold: number;
   onThresholdChange: (value: number) => void;
+  mode: "actual" | "forecast";
+  onModeChange: (mode: "actual" | "forecast") => void;
 }
 
 export default function DashboardControls({
@@ -36,6 +38,8 @@ export default function DashboardControls({
   onChartChange,
   threshold,
   onThresholdChange,
+  mode,
+  onModeChange,
 }: Props) {
 return (
 //   <div className={styles.dashboard}>
@@ -86,6 +90,7 @@ return (
 //     </div>
 
 //   </div>
+
 <div className={styles.dashboard}>
   <div className={styles.controlsRow}>
 
@@ -139,6 +144,32 @@ return (
     </div>
 
   </div>
+
+  <div className={styles.divider} />
+
+    {/* MODE */}
+    <div className={styles.section}>
+      <span className={styles.label}>Mode:</span>
+      <div className={styles.yearTabs}>
+        <button
+          onClick={() => onModeChange("actual")}
+          className={`${styles.yearBtn} ${
+            mode === "actual" ? styles.active : ""
+          }`}
+        >
+          Actual
+        </button>
+
+        <button
+          onClick={() => onModeChange("forecast")}
+          className={`${styles.yearBtn} ${
+            mode === "forecast" ? styles.active : ""
+          }`}
+        >
+          Forecast
+        </button>
+      </div>
+    </div>
 </div>
 );
 }

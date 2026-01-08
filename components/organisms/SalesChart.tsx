@@ -1,5 +1,6 @@
 "use client";
 
+import { generateForecast } from "@/data/forecast";
 import {
   BarChart,
   Bar,
@@ -23,11 +24,13 @@ type SalesData = {
   month: string;
   sales: number;
   profit: number;
+  isForecast?: boolean;
 };
 
 type Props = {
   data: SalesData[];
   type: "bar" | "line" | "pie" | "area" | "stacked" | "combo" | "categoryPie";
+  mode: "actual" | "forecast";
 };
 
 const COLORS = [
@@ -39,32 +42,62 @@ const COLORS = [
   "#0ea5e9",
 ];
 
-export default function SalesChart({ data, type }: Props) {
+export default function SalesChart({ data, type, mode }: Props) {
+  const forecastData =
+      mode === "forecast" ? generateForecast(data, 3) : [];
+
+  const chartData =
+      mode === "forecast" ? [...data, ...forecastData] : data;
+
   return (
     <ResponsiveContainer width="100%" height={400}>
 
       {/* BAR CHART */}
       {type === "bar" && (
-        <BarChart data={data}>
+        <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
-          <Tooltip />
+          <Tooltip
+              formatter={(value, name, item) => {
+                if (value == null) return [];
+
+                const payload = item?.payload as { isForecast?: boolean } | undefined;
+                const isForecast = payload?.isForecast;
+
+                return [
+                  value,
+                  isForecast ? `${name} (Forecast)` : name,
+                ];
+              }}
+          />
           <Legend />
-          <Bar dataKey="sales" fill="#2563eb" />
-          <Bar dataKey="profit" fill="#16a34a" />
+          <Bar dataKey="sales" fill="#2563eb" fillOpacity={mode === "forecast" ? 0.6 : 1}/>
+          <Bar dataKey="profit" fill="#16a34a" fillOpacity={mode === "forecast" ? 0.6 : 1}/>
         </BarChart>
       )}
 
       {/* LINE CHART */}
       {type === "line" && (
-        <LineChart data={data}>
+        <LineChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name, item) => {
+              if (value == null) return [];
+
+              const payload = item?.payload as { isForecast?: boolean } | undefined;
+              const isForecast = payload?.isForecast;
+
+              return [
+                value,
+                isForecast ? `${name} (Forecast)` : name,
+              ];
+            }}
+          />
           <Legend />
-          <Line dataKey="sales" stroke="#2563eb" strokeWidth={2} />
+          <Line dataKey="sales" stroke="#2563eb" strokeWidth={2} strokeDasharray={mode === "forecast" ? "5 5" : undefined}/>
           <Line dataKey="profit" stroke="#16a34a" strokeWidth={2} />
         </LineChart>
       )}
@@ -95,34 +128,60 @@ export default function SalesChart({ data, type }: Props) {
 
       {/* AREA CHART */}
       {type === "area" && (
-        <AreaChart data={data}>
+        <AreaChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name, item) => {
+              if (value == null) return [];
+
+              const payload = item?.payload as { isForecast?: boolean } | undefined;
+              const isForecast = payload?.isForecast;
+
+              return [
+                value,
+                isForecast ? `${name} (Forecast)` : name,
+              ];
+            }}
+          />
           <Legend />
           <Area
             type="monotone"
             dataKey="sales"
             stroke="#2563eb"
             fill="#93c5fd"
+            fillOpacity={mode === "forecast" ? 0.4 : 0.8}
           />
           <Area
             type="monotone"
             dataKey="profit"
             stroke="#16a34a"
             fill="#86efac"
+            fillOpacity={mode === "forecast" ? 0.4 : 0.8}
           />
         </AreaChart>
       )}
 
       {/* STACKED BAR CHART */}
       {type === "stacked" && (
-        <BarChart data={data}>
+        <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name, item) => {
+              if (value == null) return [];
+
+              const payload = item?.payload as { isForecast?: boolean } | undefined;
+              const isForecast = payload?.isForecast;
+
+              return [
+                value,
+                isForecast ? `${name} (Forecast)` : name,
+              ];
+            }}
+          />
           <Legend />
           <Bar dataKey="sales" stackId="a" fill="#2563eb" />
           <Bar dataKey="profit" stackId="a" fill="#16a34a" />
@@ -131,11 +190,23 @@ export default function SalesChart({ data, type }: Props) {
 
       {/* COMBO CHART */}
       {type === "combo" && (
-        <ComposedChart data={data}>
+        <ComposedChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name, item) => {
+              if (value == null) return [];
+
+              const payload = item?.payload as { isForecast?: boolean } | undefined;
+              const isForecast = payload?.isForecast;
+
+              return [
+                value,
+                isForecast ? `${name} (Forecast)` : name,
+              ];
+            }}
+          />
           <Legend />
           <Bar dataKey="sales" fill="#2563eb" />
           <Line
@@ -143,6 +214,7 @@ export default function SalesChart({ data, type }: Props) {
             dataKey="profit"
             stroke="#6d23ebff"
             strokeWidth={3}
+            strokeDasharray={mode === "forecast" ? "5 5" : undefined}
           />
         </ComposedChart>
       )}

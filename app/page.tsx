@@ -16,10 +16,38 @@ export default function Home() {
   const [threshold, setThreshold] = useState(0);
   const [chartType, setChartType] = useState<
   "bar" | "line" | "pie" | "area" | "stacked" | "combo">("bar");
+  const [mode, setMode] = useState<"actual" | "forecast">("actual");
 
   const filteredData = salesData[year].filter(
     (item) => item.sales >= threshold
   );
+
+  // Forecast KPI logic
+    const forecastMonths = 3;
+
+    const lastActualSale =
+      filteredData[filteredData.length - 1]?.sales ?? 0;
+
+    const avgGrowthRate = (() => {
+      if (filteredData.length < 3) return 0;
+
+      let sum = 0;
+      for (let i = filteredData.length - 3; i < filteredData.length - 1; i++) {
+        sum +=
+          (filteredData[i + 1].sales - filteredData[i].sales) /
+          filteredData[i].sales;
+      }
+      return sum / 2;
+    })();
+
+    const forecastEndValue = Math.round(
+      lastActualSale * Math.pow(1 + avgGrowthRate, forecastMonths)
+    );
+
+    const forecastGrowthPercent =
+      lastActualSale > 0
+        ? ((forecastEndValue - lastActualSale) / lastActualSale) * 100
+        : 0;
 
   return (
     <main className="min-h-screen bg-gray-100 dark:bg-gray-950 p-8 text-black dark:text-white">
@@ -42,6 +70,34 @@ export default function Home() {
 
       {/*  KPI Cards – FULL WIDTH */}
       <KpiCards />
+
+      {mode === "forecast" && (
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-5">
+            <p className="text-sm text-gray-500">Expected Growth (Next 3 Months)</p>
+            <p
+              className={`text-3xl font-bold ${
+                forecastGrowthPercent >= 0
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
+              {forecastGrowthPercent.toFixed(1)}%
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-5">
+            <p className="text-sm text-gray-500">Forecast Insight</p>
+            <p className="text-sm mt-2">
+              Based on recent sales trends, revenue is expected to{" "}
+              <span className="font-semibold">
+                {forecastGrowthPercent >= 0 ? "increase" : "decrease"}
+              </span>{" "}
+              over the next quarter.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Content Wrapper */}
       <div className="max-w-6xl mx-auto">
@@ -82,12 +138,14 @@ export default function Home() {
             onChartChange={setChartType}
             threshold={threshold}
             onThresholdChange={setThreshold}
+            mode={mode}
+            onModeChange={setMode}
           />
         </section>
 
         {/* Chart Card */}
         <section className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
-          <SalesChart data={filteredData} type={chartType} />
+          <SalesChart data={filteredData} type={chartType} mode={mode} />
         </section>
 
           {/* NEW SECTION BELOW DASHBOARD */}

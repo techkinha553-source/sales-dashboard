@@ -1,3 +1,11 @@
+export type SalesData = {
+  month: string;
+  sales: number;
+  profit: number;
+  isForecast?: boolean;
+};
+
+
 export const salesData: Record<
   number,
   { month: string; sales: number; profit: number }[]
