@@ -49,6 +49,30 @@ export default function Home() {
         ? ((forecastEndValue - lastActualSale) / lastActualSale) * 100
         : 0;
 
+        // Risk calculation based on sales volatility
+        const volatility = (() => {
+          if (filteredData.length < 4) return 0;
+
+          const changes: number[] = [];
+          for (let i = 1; i < filteredData.length; i++) {
+            changes.push(
+              Math.abs(
+                (filteredData[i].sales - filteredData[i - 1].sales) /
+                  filteredData[i - 1].sales
+              )
+            );
+          }
+
+          return changes.reduce((a, b) => a + b, 0) / changes.length;
+        })();
+
+        const riskLevel =
+          volatility < 0.05
+            ? "Low"
+            : volatility < 0.12
+            ? "Medium"
+            : "High";
+
   return (
     <main className="min-h-screen bg-gray-100 dark:bg-gray-950 p-8 text-black dark:text-white">
 
@@ -72,31 +96,50 @@ export default function Home() {
       <KpiCards />
 
       {mode === "forecast" && (
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-5">
-            <p className="text-sm text-gray-500">Expected Growth (Next 3 Months)</p>
-            <p
-              className={`text-3xl font-bold ${
-                forecastGrowthPercent >= 0
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {forecastGrowthPercent.toFixed(1)}%
-            </p>
+        <>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-5">
+              <p className="text-sm text-gray-500">
+                Expected Growth (Next 3 Months)
+              </p>
+              <p
+                className={`text-3xl font-bold ${
+                  forecastGrowthPercent >= 0
+                    ? "text-green-600"
+                    : "text-red-600"
+                }`}
+              >
+                {forecastGrowthPercent.toFixed(1)}%
+              </p>
+            </div>
+
+            <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-5">
+              <p className="text-sm text-gray-500">Forecast Insight</p>
+              <p className="text-sm mt-2">
+                Based on recent sales trends, revenue is expected to{" "}
+                <span className="font-semibold">
+                  {forecastGrowthPercent >= 0 ? "increase" : "decrease"}
+                </span>{" "}
+                over the next quarter.
+              </p>
+            </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-900 rounded-xl shadow p-5">
-            <p className="text-sm text-gray-500">Forecast Insight</p>
-            <p className="text-sm mt-2">
-              Based on recent sales trends, revenue is expected to{" "}
-              <span className="font-semibold">
-                {forecastGrowthPercent >= 0 ? "increase" : "decrease"}
-              </span>{" "}
-              over the next quarter.
-            </p>
+          <div className="mt-4">
+            <span
+              className={`inline-block px-4 py-1 rounded-full text-sm font-semibold
+                ${
+                  riskLevel === "Low"
+                    ? "bg-green-100 text-green-700"
+                    : riskLevel === "Medium"
+                    ? "bg-yellow-100 text-yellow-700"
+                    : "bg-red-100 text-red-700"
+                }`}
+            >
+              Forecast Risk: {riskLevel}
+            </span>
           </div>
-        </div>
+        </>
       )}
 
       {/* Content Wrapper */}

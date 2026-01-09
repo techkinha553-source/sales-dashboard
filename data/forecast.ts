@@ -19,7 +19,7 @@ export function generateForecast(data: SalesData[], months = 3) {
 
   const avgGrowth = growthSum / (lastThree.length - 1);
 
-  const forecast = [];
+  const forecast: SalesData[] = [];
   let lastValue = lastThree[lastThree.length - 1].sales;
 
   for (let i = 1; i <= months; i++) {
@@ -34,4 +34,50 @@ export function generateForecast(data: SalesData[], months = 3) {
   }
 
   return forecast;
+}
+
+/**
+ * Forecast with confidence range (upper / lower band)
+ */
+export function generateForecastWithConfidence(
+  data: SalesData[],
+  months = 3,
+  variance = 0.08 // 8% confidence band
+) {
+  const baseForecast = generateForecast(data, months);
+
+  const upper = baseForecast.map((item) => ({
+    ...item,
+    sales: Math.round(item.sales * (1 + variance)),
+    confidence: "upper" as const,
+  }));
+
+  const lower = baseForecast.map((item) => ({
+    ...item,
+    sales: Math.round(item.sales * (1 - variance)),
+    confidence: "lower" as const,
+  }));
+
+  return { baseForecast, upper, lower };
+}
+
+export function calculateForecastRisk(data: SalesData[]) {
+  if (data.length < 3) return "Low";
+
+  const recent = data.slice(-3);
+  const changes: number[] = [];
+
+  for (let i = 1; i < recent.length; i++) {
+    const change =
+      Math.abs(recent[i].sales - recent[i - 1].sales) /
+      recent[i - 1].sales;
+    changes.push(change);
+  }
+
+  const avgVolatility =
+    changes.reduce((a, b) => a + b, 0) / changes.length;
+
+  if (avgVolatility > 0.12) return "High";
+  if (avgVolatility > 0.05) return "Medium";
+  return "Low";
 }
