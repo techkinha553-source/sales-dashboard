@@ -1,7 +1,10 @@
 @media (max-width: 900px) {
   .controlsRow {
-    flex-wrap: wrap;
-    gap: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: nowrap;      
+    overflow-x: auto;       
   }
 
   .divider {
@@ -21,10 +24,11 @@
 } */
 
 .dashboard {
-  padding: 18px;
+  padding: 13px;
   border-radius: 16px;
   background: var(--dashboard-bg);
   border: 1px solid var(--dashboard-border);
+  overflow-x: auto;
 }
 
 /* ROW = SINGLE HORIZONTAL LINE */
@@ -33,14 +37,15 @@
 .controlsRow {
   display: flex;
   align-items: center;
-  gap: 24px;
+  /* gap: 14px; */
   flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
 /* LABEL */
 .label {
   min-width: 80px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   /* color: var(--text-muted); */
   color: rgb(101, 100, 100);
@@ -49,13 +54,16 @@
 .section {
   display: flex;
   align-items: center;
-  gap: 14px;
+  /* gap: 20px; */
+  white-space: nowrap;
+  flex-shrink: 0;
 }
+
 /* YEAR TABS */
 .yearTabs {
   display: inline-flex;
   background: var(--muted);
-  padding: 4px;
+  padding: 3px;
   border-radius: 10px;
 }
 
@@ -87,7 +95,7 @@
 /* CHART BUTTONS */
 .chartButtons {
   display: flex;
-  gap: 10px;
+  gap: 7px;
 }
 
 .chartBtn {
@@ -111,7 +119,8 @@
 /* INPUT */
 .inputWrapper {
   position: relative;
-  width: 180px;
+  width: 160px;
+  flex-shrink: 0;
 }
 
 .inputWrapper input {
@@ -125,7 +134,7 @@
 
 .inputWrapper {
   position: relative;
-  width: 160px;
+  width: 110px;
 }
 
 .inputIconLeft {

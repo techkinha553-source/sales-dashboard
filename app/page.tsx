@@ -143,7 +143,7 @@ export default function Home() {
       )}
 
       {/* Content Wrapper */}
-      <div className="max-w-6xl mx-auto">
+      <div className="mx-auto">
 
         {/* Filters Card */}
         {/* <section className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-6 mb-8">

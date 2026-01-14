@@ -84,11 +84,34 @@ export default function SalesChart({ data, type, mode }: Props) {
       ? generateForecastWithConfidence(data, 3)
       : null;
 
+  const risk =
+    mode === "forecast"
+      ? calculateForecastRisk(data)
+      : null;
+
   const upperBand = confidence?.upper ?? [];
   const lowerBand = confidence?.lower ?? [];
 
   return (
     <ResponsiveContainer width="100%" height={400}>
+
+      {mode === "forecast" && risk && (
+        <div
+          style={{
+            marginBottom: 8,
+            fontWeight: 600,
+            color:
+              risk === "High"
+                ? "#dc2626"
+                : risk === "Medium"
+                ? "#f59e0b"
+                : "#16a34a",
+          }}
+        >
+          Forecast Risk: {risk}
+        </div>
+      )}
+
       {/* BAR CHART */}
       {type === "bar" && (
         <BarChart data={chartData}>
