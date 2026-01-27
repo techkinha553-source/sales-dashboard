@@ -79,7 +79,7 @@ return (
     <div className={styles.divider} />
 
     {/* MIN SALES */}
-    <div className={styles.section}>
+    {/* <div className={styles.section}>
       <span className={styles.label}>Min Sales:</span>
       <div className={styles.inputWrapper}>
         <span className={styles.inputIconLeft}>
@@ -91,6 +91,41 @@ return (
           onChange={(e) => onThresholdChange(Number(e.target.value))}
         />
         <span className={styles.inputIconRight}>$</span>
+      </div>
+    </div> */}
+
+
+    {/* MIN SALES */}
+    <div className={styles.minSalesSection}>
+      <span className={styles.minSalesLabel}>Min Sales:</span>
+
+      <div className={styles.minSalesInputWrapper}>
+        <Filter size={14} className={styles.minSalesIconLeft} />
+
+        <input
+          type="number"
+          min={0}
+          placeholder="0"
+          value={threshold === 0 ? "" : threshold}
+          onChange={(e) => {
+            const rawValue = e.target.value;
+
+            // Empty input = reset filter
+            if (rawValue === "") {
+              onThresholdChange(0);
+              return;
+            }
+
+            const numericValue = Number(rawValue);
+
+            if (!isNaN(numericValue)) {
+              onThresholdChange(numericValue);
+            }
+          }}
+          className={styles.minSalesInput}
+        />
+
+        <span className={styles.minSalesCurrency}>$</span>
       </div>
     </div>
 

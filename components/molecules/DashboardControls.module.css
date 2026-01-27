@@ -190,3 +190,60 @@
   align-items: center;
   gap: 16px;
 } */
+
+
+
+/* =========================
+   MIN SALES (ISOLATED)
+   ========================= */
+
+.minSalesSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.minSalesLabel {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(101, 100, 100);
+}
+
+.minSalesInputWrapper {
+  position: relative;
+  width: 115px;
+}
+
+.minSalesInput {
+  width: 100%;
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: 1px solid #2563eb;
+  background: var(--bg);
+  font-size: 14px;
+  color: rgb(101, 100, 100);
+}
+
+.minSalesInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+.minSalesIconLeft {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(101, 100, 100);
+}
+
+.minSalesCurrency {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: rgb(101, 100, 100);
+}

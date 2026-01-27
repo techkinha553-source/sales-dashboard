@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ThemeToggle from "@/components/atoms/ThemeToggle";
+// import ThemeToggle from "@/components/atoms/ThemeToggle";
 import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
@@ -52,7 +52,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <header className="flex justify-end p-4">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </header>
           {children}
         </ThemeProvider>
