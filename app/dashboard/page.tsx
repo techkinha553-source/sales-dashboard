@@ -199,7 +199,7 @@ export default function Home() {
           Sales Dashboard
         </h1>
       </header> */}
-      <Navbar mode={mode} onModeChange={setMode} />
+      <Navbar />
 
         {/* <div className="p-8"></div> */}
       {/* KPI */}
