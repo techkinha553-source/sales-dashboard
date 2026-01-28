@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from "@/components/molecules/Navbar";
+// import Navbar from "@/components/molecules/Navbar";
 import { useState } from "react";
 import SalesChart from "@/components/organisms/SalesChart";
 import { salesData } from "@/data/salesData";

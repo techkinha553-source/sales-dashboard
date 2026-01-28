@@ -6,7 +6,7 @@ import SalesChart from "@/components/organisms/SalesChart";
 import { salesData } from "@/data/salesData";
 import KpiCards from "@/components/organisms/KpiCards";
 import DashboardControls from "@/components/molecules/DashboardControls";
-import YearlyComparisonSection from "@/components/organisms/YearlyComparisonSection";
+// import YearlyComparisonSection from "@/components/organisms/YearlyComparisonSection";
 
 export default function Home() {
   const [year, setYear] = useState(2024);
@@ -135,7 +135,7 @@ export default function Home() {
           </div>
 
           {/* -------- RISK BOXES -------- */}
-          <div className="mt-6 flex items-center gap-4">
+          <div className="mt-6 flex items-center gap-4 ">
             {(["Low", "Medium", "High"] as const).map((level) => {
               const active = riskLevel === level;
               return (
@@ -179,8 +179,9 @@ export default function Home() {
       )}
 
       {/* CONTENT */}
-      <div className="mx-auto mt-8">
-        <section className="mb-8">
+      <div className="w-full mt-8 flex flex-col gap-8">
+      {/* DASHBOARD CONTROLS */}
+        <section className="w-full">
           <DashboardControls
             year={year}
             onYearChange={setYear}
@@ -193,11 +194,12 @@ export default function Home() {
           />
         </section>
 
-        <section className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
+        {/* MAIN SALES CHART */}
+        <section className="w-full bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
           <SalesChart data={filteredData} type={chartType} mode={mode} />
         </section>
-
-        <YearlyComparisonSection />
+        {/* YEARLY COMPARISON */}
+        {/* <YearlyComparisonSection /> */}
       </div>
     </main>
   );
