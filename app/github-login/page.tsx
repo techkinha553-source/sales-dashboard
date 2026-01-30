@@ -14,7 +14,7 @@ export default function GithubLoginPage() {
         </p>
 
         <button
-          onClick={() => signIn("github")}
+            onClick={() => signIn("github", {callbackUrl: "/dashboard",})}
           className="w-full bg-black text-white py-4 rounded-lg hover:opacity-90 transition "
         >
           Continue with GitHub

@@ -62,6 +62,7 @@
 // }
 
 
+import Providers from "./providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -90,16 +91,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 dark:bg-gray-950 transition-colors`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 dark:bg-gray-950 transition-colors`}
         >
-          {children}
-        </ThemeProvider>
+          <Providers>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+            >
+              {children}
+            </ThemeProvider>
+          </Providers>
       </body>
     </html>
   );
 }
+
