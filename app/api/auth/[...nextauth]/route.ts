@@ -9,7 +9,6 @@ const handler = NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
-  pages: { signIn: "/github-login" },
   callbacks: {
     async redirect({ baseUrl }) {
       return `${baseUrl}/dashboard`;
