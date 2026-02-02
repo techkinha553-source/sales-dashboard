@@ -49,13 +49,18 @@ export default function Navbar() {
           </div>
 
           {/* GITHUB (RIGHT) */}
-          <button
+          {/* <button
             onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
             className="relative p-2 rounded-lg 
                       bg-gray-100 dark:bg-gray-900
                       hover:bg-gray-200 dark:hover:bg-gray-700
                       transition flex items-center justify-center"
           >
+            <GithubIcon />
+          </button> */}
+          <button
+            onClick={() => router.push("/github-login")}
+            >
             <GithubIcon />
           </button>
 
@@ -65,7 +70,57 @@ export default function Navbar() {
   );
 }
 
+// "use client";
 
+// import ThemeToggle from "@/components/atoms/ThemeToggle";
+// import GithubIcon from "@/components/atoms/GithubIcon";
+// import { useRouter } from "next/navigation";
+// import { useState } from "react";
+// // import SideNavbar from "./SideNavbar";
+
+// export default function Navbar() {
+//   const router = useRouter();
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   return (
+//     <>
+//       {/* TOP NAVBAR */}
+//       <header className="w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+//         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+//           {/* LEFT: Hamburger + Title */}
+//           <div className="flex items-center gap-3">
+//             {/* HAMBURGER */}
+//             <button
+//               onClick={() => setIsOpen(true)}
+//               className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
+//             >
+//               <span className="block w-5 h-0.5 bg-gray-800 dark:bg-gray-200 mb-1" />
+//               <span className="block w-5 h-0.5 bg-gray-800 dark:bg-gray-200 mb-1" />
+//               <span className="block w-5 h-0.5 bg-gray-800 dark:bg-gray-200" />
+//             </button>
+
+//             {/* TITLE */}
+//             <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+//               Sales Dashboard
+//             </h1>
+//           </div>
+
+//           {/* RIGHT */}
+//           <div className="flex items-center gap-4">
+//             <ThemeToggle />
+//             <button onClick={() => router.push("/github-login")}>
+//               <GithubIcon />
+//             </button>
+//           </div>
+//         </div>
+//       </header>
+
+//       {/* SIDE NAVBAR */}
+//       {/* <SideNavbar isOpen={isOpen} onClose={() => setIsOpen(false)} /> */}
+//     </>
+//   );
+// }
 
 // "use client";
 

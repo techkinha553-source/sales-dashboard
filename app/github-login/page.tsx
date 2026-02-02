@@ -13,12 +13,19 @@ export default function GithubLoginPage() {
           Login with GitHub to continue
         </p>
 
-        <button
+        {/* <button
             onClick={() => signIn("github", {callbackUrl: "/dashboard",})}
           className="w-full bg-black text-white py-4 rounded-lg hover:opacity-90 transition "
         >
           Continue with GitHub
+        </button> */}
+        <button
+          onClick={() => signIn("github", { callbackUrl: "/" })}
+          className="w-full bg-black text-white py-4 rounded-lg"
+        >
+          Continue with GitHub
         </button>
+        
       </div>
     </main>
   );
